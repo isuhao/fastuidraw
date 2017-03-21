@@ -1547,11 +1547,11 @@ draw_convex_polygon(const PainterFillShader &shader,
 
 	      which_pt = (k == 0) ? prev_src : src; 
 	      dst_attrib[2 * k + 0].m_attrib0 = pack_vec4(pts[which_pt].x(), pts[which_pt].y(), n.x(), n.y());
-	      dst_attrib[2 * k + 0].m_attrib1 = pack_vec4(1.0f, 0.0f, 0.0f, 0.0f);
+	      dst_attrib[2 * k + 0].m_attrib1 = pack_vec4(1.0f, pts[prev_src].x(), pts[prev_src].y(), 0.0f);
 	      dst_attrib[2 * k + 0].m_attrib2 = uvec4(0, 0, 0, 0);
 
 	      dst_attrib[2 * k + 1].m_attrib0 = pack_vec4(pts[which_pt].x(), pts[which_pt].y(), -n.x(), -n.y());
-	      dst_attrib[2 * k + 1].m_attrib1 = pack_vec4(-1.0f, 0.0f, 0.0f, 0.0f);
+	      dst_attrib[2 * k + 1].m_attrib1 = pack_vec4(-1.0f, pts[prev_src].x(), pts[prev_src].y(), 0.0f);
 	      dst_attrib[2 * k + 1].m_attrib2 = uvec4(0, 0, 0, 0);
 	    }
 	}

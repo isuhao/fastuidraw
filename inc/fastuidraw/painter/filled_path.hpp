@@ -76,12 +76,14 @@ public:
       of the boudnary of a filled component.
       The attribute data is packed as follows:
       - PainterAttribute::m_attrib0 .xy -> position of point in local coordinate (float)
-      - PainterAttribute::m_attrib0 .zw -> normal vector to edge
-      - PainterAttribute::m_attrib1 .x  -> boundary value, either -1 or 1.
-                                           This value should be interpolated across
+      - PainterAttribute::m_attrib0 .zw -> unnormalized vector perpindicular to edge
+      - PainterAttribute::m_attrib1 .x  -> boundary value, either -1 or 1;
+                                           this value should be interpolated across
 					   each triangle and used as the coverage
-					   value in the fragment shader.
-      - PainterAttribute::m_attrib1 .yzw  -> 0 (free)
+					   value in the fragment shader (float)
+      - PainterAttribute::m_attrib1 .yz -> position of the start of the edge in local
+                                           coordinates (float)
+      - PainterAttribute::m_attrib1 .w  -> 0 (free)
       - PainterAttribute::m_attrib2 .xyzw -> 0 (free)
      */
     const PainterAttributeData&

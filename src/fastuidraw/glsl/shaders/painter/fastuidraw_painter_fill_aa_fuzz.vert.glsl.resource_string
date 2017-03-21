@@ -6,19 +6,21 @@ fastuidraw_gl_vert_main(in uint sub_shader,
                         in uint shader_data_offset,
                         out uint z_add)
 {
-  vec4 position_normal;
   vec3 clip_direction, clip_p;
-  vec2 n, p;
-  float dist;
+  vec2 n, p, position_start_edge, position, normal;
+  float dist, bd;
 
-  position_normal = uintBitsToFloat(uprimary_attrib);
-
-  clip_p = fastuidraw_item_matrix * vec3(position_normal.xy, 1.0);
-  n = fastuidraw_align_normal_to_screen(clip_p, position_normal.zw);
+  position = uintBitsToFloat(uprimary_attrib.xy);
+  normal = uintBitsToFloat(uprimary_attrib.zw);
+  position_start_edge = uintBitsToFloat(usecondary_attrib.yz);
+  bd = uintBitsToFloat(usecondary_attrib.x);
+  
+  clip_p = fastuidraw_item_matrix * vec3(position_start_edge, 1.0);
+  n = fastuidraw_align_normal_to_screen(clip_p, normal);
   clip_direction = fastuidraw_item_matrix * vec3(n, 0.0);
   dist = fastuidraw_local_distance_from_pixel_distance(1.0, clip_p, clip_direction);
-  p = position_normal.xy + dist * n;
-  fastuidraw_aa_fuzz = uintBitsToFloat(usecondary_attrib.x);
+  p = position + dist * n;
+  fastuidraw_aa_fuzz = bd;
   z_add = 0u;
 
   return p.xyxy;

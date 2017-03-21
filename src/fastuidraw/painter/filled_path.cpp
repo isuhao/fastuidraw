@@ -2382,12 +2382,12 @@ pack_attribute(const Edge &edge,
       position = m_pts[edge[k]];
       dst[2 * k + 0].m_attrib0 = fastuidraw::pack_vec4(position.x(), position.y(),
                                                        normal.x(), normal.y());
-      dst[2 * k + 0].m_attrib1 = fastuidraw::pack_vec4(1.0f, 0.0f, 0.0f, 0.0f);
+      dst[2 * k + 0].m_attrib1 = fastuidraw::pack_vec4(1.0f, m_pts[edge[0]].x(), m_pts[edge[0]].y(), 0.0f);
       dst[2 * k + 0].m_attrib2 = fastuidraw::uvec4(0, 0, 0, 0);
 
       dst[2 * k + 1].m_attrib0 = fastuidraw::pack_vec4(position.x(), position.y(),
                                                        -normal.x(), -normal.y());
-      dst[2 * k + 1].m_attrib1 = fastuidraw::pack_vec4(-1.0f, 0.0f, 0.0f, 0.0f);
+      dst[2 * k + 1].m_attrib1 = fastuidraw::pack_vec4(-1.0f, m_pts[edge[0]].x(), m_pts[edge[0]].y(), 0.0f);
       dst[2 * k + 1].m_attrib2 = fastuidraw::uvec4(0, 0, 0, 0);
     }
 }
